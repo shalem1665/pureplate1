@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pure Plate — Organic Fresh</title>
+  <style>
+    :root{
+      --bg-start:#a8f0c6;
+      --bg-end:#e8fff1;
+      --card:rgba(255,255,255,0.5);
+      --accent:#2f9e44;
+      --accent-2:#6fdc8c;
+      --muted:#3b5440;
+      --glass:rgba(255,255,255,0.2);
+      --radius:14px;
+      --max-width:1200px;
+      font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+    }
+    *{box-sizing:border-box;}
+    html,body{height:100%;margin:0;background:linear-gradient(135deg,var(--bg-start),var(--bg-end));color:#183422;overflow-x:hidden;scroll-behavior:smooth;transition: all 0.3s;}
+    a{color:inherit;text-decoration:none;}
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:24px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;background:rgba(255,255,255,0.25);backdrop-filter:blur(10px);border-radius:16px;padding:10px 18px;box-shadow:0 10px 40px rgba(47,158,68,0.1);position:sticky;top:0;z-index:100;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 8px 30px rgba(47,158,68,0.12);}
+    .brand h1{margin:0;font-size:22px;}
+    .tag{color:var(--muted);font-size:13px;}
+    nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+    .nav-link{background:transparent;border:none;padding:8px 12px;border-radius:10px;color:inherit;cursor:pointer;font-weight:600;transition:transform .2s ease;}
+    .nav-link:hover{background:rgba(0,0,0,0.03);transform:scale(1.05);}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;box-shadow:0 8px 24px rgba(47,158,68,0.14);transition:transform .25s ease,box-shadow .25s ease;}
+    .btn:hover{transform:scale(1.08);box-shadow:0 12px 32px rgba(47,158,68,0.2);}
+    .btn.secondary{background:rgba(255,255,255,0.2);border:1px solid rgba(24,52,34,0.1);color:var(--muted);font-weight:600;}
+    
+    section{margin-top:36px;}
+    h2.section-title{text-align:center;font-size:28px;margin-bottom:16px;}
+    
+    /* Hero */
+    .hero{margin-top:18px;padding:26px;border-radius:14px;display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:center;background:rgba(255,255,255,0.3);backdrop-filter:blur(12px);}
+    .hero-left .eyebrow{font-size:13px;color:var(--muted);margin-bottom:8px;letter-spacing:1px;}
+    .hero-left h2{margin:0;font-size:34px;line-height:1.04;}
+    .hero-left p{color:var(--muted);margin-top:12px;max-width:90%;}
+    .cta-row{margin-top:18px;display:flex;gap:12px;}
+    .hero-right{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#f7fff9,#e9f9ee);box-shadow:0 10px 30px rgba(16,40,20,0.06);padding:14px;}
+    .hero-right img{width:100%;height:300px;object-fit:cover;border-radius:8px;transform:scale(1);transition:transform .5s ease;}
+    .hero-right img:hover{transform:scale(1.05);}
+    
+    /* Menu Cards */
+    .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    .card{background:rgba(255,255,255,0.35);padding:12px;border-radius:12px;backdrop-filter:blur(8px);border:1px solid var(--glass);box-shadow:0 8px 24px rgba(16,40,20,0.04);transition:transform .25s ease,box-shadow .25s ease,filter .3s ease;}
+    .card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 30px 60px rgba(16,40,20,0.08);filter:drop-shadow(0 4px 10px rgba(47,158,68,0.4));}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px;transition:transform .3s ease;}
+    .card img:hover{transform:scale(1.08);}
+    .card .title{font-weight:700;margin-top:10px;font-size:16px;}
+    .card .desc{color:var(--muted);font-size:13px;margin-top:6px;}
+    .price-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+    .price{font-weight:800;}
+    .add{margin-top:10px;}
+    
+    /* About */
+    #about{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+    #about img{width:350px;border-radius:12px;box-shadow:0 10px 30px rgba(47,158,68,0.15);transition:transform .3s ease;}
+    #about img:hover{transform:scale(1.05);}
+    #about p{max-width:600px;font-size:15px;line-height:1.6;color:#3b5440;}
+    
+    /* Contact form */
+    .contact-form{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+    input,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:rgba(255,255,255,0.7);transition:all .3s ease;}
+    input:focus,textarea:focus{outline:none;border:1px solid var(--accent);box-shadow:0 4px 14px rgba(47,158,68,0.3);}
+    button[type="submit"]{margin-top:6px;}
+    
+    /* Footer */
+    footer{margin-top:36px;padding:18px;border-radius:10px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.25);backdrop-filter:blur(10px);}
+    
+    /* Dark mode */
+    body.dark {background: #121212; color: #eee;}
+    body.dark header {background: rgba(30,30,30,0.6);}
+    body.dark .card {background: rgba(50,50,50,0.35); border:1px solid rgba(255,255,255,0.05);}
+    body.dark .hero-right {background: linear-gradient(180deg,#333,#111);}
+    body.dark .btn {color:white;}
+    body.dark .btn.secondary {background: rgba(255,255,255,0.1);}
+    body.dark footer {background: rgba(30,30,30,0.3); color:#aaa;}
+    
+    /* Animations */
+    .fade-in {opacity:0; transform: translateY(20px); transition: all 0.5s ease;}
+    .fade-in.visible {opacity:1; transform:translateY(0);}
+    
+    @media(max-width:1000px){.menu{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr 320px}}
+    @media(max-width:720px){.menu{grid-template-columns:1fr}.hero{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">PP</div>
+        <div><h1>Pure Plate</h1><div class="tag">Farm-to-table • Seasonal • Honest</div></div>
+      </div>
+      <nav>
+        <button class="nav-link" data-scroll="home">Home</button>
+        <button class="nav-link" data-scroll="menu">Menu</button>
+        <button class="nav-link" data-scroll="about">About</button>
+        <button class="nav-link" data-scroll="contact">Contact</button>
+        <button class="btn secondary" id="reserveBtn">Reserve</button>
+        <button class="btn secondary" id="darkModeToggle">🌙</button>
+      </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="hero fade-in">
+      <div class="hero-left">
+        <div class="eyebrow">Welcome to Pure Plate</div>
+        <h2>Fresh Organic Meals, Straight From Our Farm</h2>
+        <p>Enjoy seasonal ingredients, authentic flavors, and healthy recipes crafted to delight your taste buds.</p>
+        <div class="cta-row">
+          <button class="btn" data-scroll="menu">Explore Menu</button>
+          <button class="btn secondary" id="reserveBtn2">Reserve a Table</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80" alt="Fresh Food">
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="fade-in">
+      <h2 class="section-title">Our Recipes</h2>
+      <div class="menu">
+        <div class="card" data-price="350">
+          <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=60" alt="">
+          <div class="title">Grilled Veggie Bowl</div>
+          <div class="desc">Fresh seasonal veggies with organic grains and homemade dressing.</div>
+          <div class="price-row"><div class="price">₹350</div><button class="btn add">Add</button></div>
+        </div>
+        <div class="card" data-price="420">
+          <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=400&q=60" alt="">
+          <div class="title">Quinoa Salad</div>
+          <div class="desc">Nutritious quinoa with fresh herbs, nuts, and citrus dressing.</div>
+          <div class="price-row"><div class="price">₹420</div><button class="btn add">Add</button></div>
+        </div>
+        <div class="card" data-price="450">
+          <img src="WhatsApp Image 2025-10-14 at 22.22.47_34644268.jpg" alt="">
+          <div class="title">Biryani Special</div>
+          <div class="desc">Aromatic basmati rice with fresh vegetables & herbs, lightly spiced.</div>
+          <div class="price-row"><div class="price">₹450</div><button class="btn add">Add</button></div>
+        </div>
+        <div class="card" data-price="380">
+          <img src="pasta.jpg" alt="">
+          <div class="title">Pasta Primavera</div>
+          <div class="desc">Fresh veggies tossed in light garlic and olive oil sauce.</div>
+          <div class="price-row"><div class="price">₹380</div><button class="btn add">Add</button></div>
+        </div>
+        <div class="card" data-price="300">
+          <img src="smooth bowl.jpg" alt="">
+          <div class="title">Smoothie Bowl</div>
+          <div class="desc">Blended fruits with chia seeds, granola, and fresh berries.</div>
+          <div class="price-row"><div class="price">₹300</div><button class="btn add">Add</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+      <h2 class="section-title">About Us</h2>
+      <div id="about" class="fade-in">
+
+        <p>Pure Plate brings together farm-fresh ingredients and authentic recipes to create meals that nourish both body and soul. We are passionate about sustainability, seasonal produce, and delivering a delightful culinary experience with every plate.</p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+      <h2 class="section-title">Contact Us</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>© 2025 Pure Plate. All rights reserved.</div>
+      <div>Follow us on Instagram & Twitter</div>
+    </footer>
+  </main>
+
+  <script>
+    // Dark mode toggle
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', ()=> {
+      document.body.classList.toggle('dark');
+      darkToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+
+    // Scroll nav links
+    document.querySelectorAll('button[data-scroll]').forEach(btn => {
+      btn.addEventListener('click', ()=> {
+        const target = document.getElementById(btn.dataset.scroll);
+        target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    // Fade-in sections on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, {threshold:0.2});
+    faders.forEach(f=>observer.observe(f));
+
+    // Reservation alert
+    document.querySelectorAll('#reserveBtn,#reserveBtn2').forEach(btn=>{
+      btn.addEventListener('click', ()=>{ alert('Reservation form will open here.'); });
+    });
+
+    // Menu add buttons
+    const addBtns = document.querySelectorAll('.card .add');
+    addBtns.forEach(btn => {
+      btn.addEventListener('click', ()=>{
+        const card = btn.closest('.card');
+        const name = card.querySelector('.title').textContent;
+        const price = card.dataset.price;
+        alert(name + ' added to cart for ₹' + price);
+      });
+    });
+  </script>
+</body>
+</html>
